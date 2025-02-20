@@ -51,9 +51,13 @@ For Svelte, it is recommended to import the package in a module context. From th
 
 <script>
   GlifRunner.APIToken = '...'
-  console.log(await GlifRunner.run('cm7c4nbnm000fj9tzb9t3pcgw')) // that's my "Hello, World!" Glif
+	;(async () => {
+		console.log(await GlifRunner.run('cm7c4nbnm000fj9tzb9t3pcgw')) // that's my "Hello, World!" Glif
+	})()
 </script>
 ```
+
+You may experiment with that code [in the Svelte REPL](https://svelte.dev/playground/ae2740d646bb46cc9c95f0fe38a1b25b?version=5.20.2)
 
 ## Examples ##
 
