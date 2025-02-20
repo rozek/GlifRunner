@@ -8,25 +8,70 @@ a simple client that runs given Glifs
 
 Glifs may be run from the Glif web site (or from any other web page that embeds them) or using the [Glif API](https://docs.glif.app/api/getting-started#running-glifs-using-the-simple-api).
 
-The `GlifRunner` implements a simple TypeScript/JavaScript client that simplifies the invocation of such Glifs. In the simplest case, you may run a single Glif and wait for its response just by specifying its id and any required input values (plus ypur personal Glif API token, but that may be configured once and used for any Glif request). Or, you may run several Glifs concurrently, in the background, get informed when they finished or cancel them if you no longer need their output.
+The `GlifRunner` implements a simple TypeScript/JavaScript client that facilitates the invocation of such Glifs. In the simplest case, you may run a single Glif and wait for its response just by specifying its id and any required input values (plus ypur personal Glif API token, but that may be configured once and used for any Glif request). Or, you may run several Glifs concurrently, in the background, get informed when they finished or cancel them if you no longer need their output.
 
 > **Important: in order to run Glifs via their API, you will have to [sign up for a Glif account](https://glif.app/signin) and [request your personal API Token](https://glif.app/settings/api-tokens)**
 
 ## Installation ##
 
-(t.b.w.)
+The `GlifRunner` may be used as an ECMAScript module (ESM), a CommonJS or AMD module or from a global variable.
+
+You may either install the package into your build environment using [NPM](https://docs.npmjs.com/) with the command
+
+```
+npm install GlifRunner
+```
+
+or load the plain script file directly
+
+```html
+<script src="https://rozek.github.io/GlifRunner/dist/GlifRunner.esm.js"></script>
+```
 
 ## Access ##
 
-(t.b.w.)
+How to access the package depends on the type of module you prefer
+
+* ESM (or Svelte): `import { GlifRunner } from 'GlifRunner'`
+* CommonJS: `const GlifRunner = require('GlifRunner')`
+* AMD: `require(['GlifRunner'], (GlifRunner) => {...})`
+
+Alternatively, you may access the global variable `GlifRunner` directly.
 
 ## Usage within Svelte ###
 
-(t.b.w.)
+For Svelte, it is recommended to import the package in a module context. From then on, its exports may be used as usual:
+
+```html
+<script context="module">
+  import { GlifRunner } from 'GlifRunner'
+</script>
+
+<script>
+  GlifRunner.APIToken = '...'
+  console.log(await GlifRunner.run('cm7c4nbnm000fj9tzb9t3pcgw')) // that's my "Hello, World!" Glif
+</script>
+```
 
 ## API Reference ##
 
-(t.b.w.)
+### GlifRunner Class ###
+
+* `constructor (APIToken?:string)`<br>initializes a new instance of `GlifRunner`, optionally accepting an API token for authentication with the Glif API.
+* `get isRunning ():boolean`<br>returns a boolean indicating whether a Glif is currently running.
+* `abort ():void`<br>stops the currently running Glif, if any.
+* `get Response ():object | undefined`<br>returns the response from the last executed Glif, or `undefined` if no Glif has been run.
+* `run (GlifId:string, InputValues?:GlifInputs, Callback?:Function):Promise<object>`<br>executes a Glif identified by `GlifId` with optional input values and a callback function. Returns a promise that resolves to the response object.
+
+### Static Methods ###
+
+* `static get APIToken ():string | undefined`<br>returns the global API token used for Glif API authentication.
+* `static set APIToken (APIToken:string | undefined)`<br>sets the global API token for Glif API authentication.
+* `static run (GlifId:string, InputValues:GlifInputs, Callback?:Function):Promise<object>`<br>provides a convenience method to run a Glif without needing to instantiate a `GlifRunner`. Returns a promise that resolves to the response object.
+
+### Type Reference ###
+
+* `GlifInputs`<br>represents the input values for a Glif, which can be either an array of strings or an object with string key-value pairs.
 
 ## Build Instructions ##
 
