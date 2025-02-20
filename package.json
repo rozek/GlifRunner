@@ -1,5 +1,5 @@
 {
-  "name": "GlifRunner",
+  "name": "glifrunner",
   "version": "0.0.1",
   "description": "a simple client to run given Glifs",
   "main": "./dist/GlifRunner.umd.js",
