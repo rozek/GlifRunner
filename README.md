@@ -21,7 +21,7 @@ The `GlifRunner` may be used as an ECMAScript module (ESM), a CommonJS or AMD mo
 You may either install the package into your build environment using [NPM](https://docs.npmjs.com/) with the command
 
 ```
-npm install GlifRunner
+npm install glifrunner
 ```
 
 or load the plain script file directly
@@ -34,9 +34,9 @@ or load the plain script file directly
 
 How to access the package depends on the type of module you prefer
 
-* ESM (or Svelte): `import { GlifRunner } from 'GlifRunner'`
-* CommonJS: `const GlifRunner = require('GlifRunner')`
-* AMD: `require(['GlifRunner'], (GlifRunner) => {...})`
+* ESM (or Svelte): `import { GlifRunner } from 'glifrunner'`
+* CommonJS: `const GlifRunner = require('glifrunner')`
+* AMD: `require(['glifrunner'], (GlifRunner) => {...})`
 
 Alternatively, you may access the global variable `GlifRunner` directly.
 
@@ -46,7 +46,7 @@ For Svelte, it is recommended to import the package in a module context. From th
 
 ```html
 <script context="module">
-  import { GlifRunner } from 'GlifRunner'
+  import { GlifRunner } from 'glifrunner'
 </script>
 
 <script>
