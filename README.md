@@ -53,6 +53,58 @@ For Svelte, it is recommended to import the package in a module context. From th
 </script>
 ```
 
+## Examples ##
+
+Here are some typical examples.
+
+### Static Usage ###
+
+Using static methods avoids having to instantiate a GlifRunner and may be the simplest way to invoke Glifs
+
+```javascript
+  GlifRunner.APIToken = '...' // enter your Glif API token here
+  console.log(await GlifRunner.run('cm7c4nbnm000fj9tzb9t3pcgw')) // that's my "Hello, World!" Glif
+```
+
+### Instance Usage ###
+
+If you want to be able to cancel a Glif request (note: the Glif itself continues to run and consume your credits, but it won't respond any longer), you will have to create a GlifRunner instance and use that to invoke your Glif:
+
+```javascript
+  GlifRunner.APIToken = '...' // enter your Glif API token here
+  const Runner = new GlifRunner()
+  const Result = await Runner.run('cm7cslpjn000dynhku4x8kw01') // "Hello, Image!" delivering an image
+  console.log('Result',Result)
+```
+
+In most cases, you will use a single API token for all your Glif invocations (and then it's fine to configure that token statically), but if you still want to use individual tokens for specific Glifs, you may specify different API tokens per GlifRunner instance:
+
+```javascript
+  const Runner = new GlifRunner('...') // enter your Glif API token here
+  const Result = await Runner.run('cm7csu1ol000212y6m6f811wp') // "Hello, Audio!" delivering an audio file
+  console.log('Result',Result)
+```
+
+And here is how you would cancel a running request
+
+```javascript
+  GlifRunner.APIToken = '...' // enter your Glif API token here
+  const Runner = new GlifRunner()
+  const Result = Runner.run('cm7cslpjn000dynhku4x8kw01') // "Result" will now be a Promise
+  Runner.abort()
+```
+
+If you run several requests concurrently, you may want to be informed when they finish or fail:
+
+```javascript
+  GlifRunner.APIToken = '...' // enter your Glif API token here
+  const Runner = new GlifRunner()
+  Runner.run('cm7cslpjn000dynhku4x8kw01',[],(Outcome,Runner) => {
+    console.log(Outcome instanceof Error ? 'run failed with' : 'run returned', Outcome)
+    console.log('the runner managing this request was',Runner)
+  })
+```
+
 ## API Reference ##
 
 ### GlifRunner Class ###
