@@ -12,6 +12,8 @@ The `GlifRunner` implements a simple TypeScript/JavaScript client that facilitat
 
 > **Important: in order to run Glifs via their API, you will have to [sign up for a Glif account](https://glif.app/signin) and [request your personal API Token](https://glif.app/settings/api-tokens)**
 
+> **Warning**: logging the GlifRunner or its instances in the browser console may reveal the configured API Token!
+
 ## Installation ##
 
 The `GlifRunner` may be used as an ECMAScript module (ESM), a CommonJS or AMD module or from a global variable.
