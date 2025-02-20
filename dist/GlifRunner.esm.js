@@ -75,6 +75,10 @@ var GlifRunner = /** @class */ (function () {
         if (this._AbortController != null) {
             this._AbortController.abort();
             this._AbortController = undefined;
+            if (this._Callback != null) {
+                this._Callback(new Error('aborted'), this);
+                this._Callback = undefined;
+            }
         }
     };
     Object.defineProperty(GlifRunner.prototype, "Response", {
@@ -104,6 +108,7 @@ var GlifRunner = /** @class */ (function () {
                                     throwError('InvalidArgument: Glif input values must be strings');
                         }
                         allowFunction('GlifRunner callback', Callback);
+                        this._Callback = Callback;
                         APIToken = this._APIToken || GlifRunner._APIToken;
                         if (APIToken == null)
                             throwError('MissingArgument: no Glif API token given');

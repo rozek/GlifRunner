@@ -12,6 +12,7 @@ export declare class GlifRunner {
     set isRunning(_: boolean);
     abort(): void;
     /**** Response - access Glif output whenever you want ****/
+    private _Callback;
     private _Response;
     get Response(): object | undefined;
     set Response(_: object | undefined);
