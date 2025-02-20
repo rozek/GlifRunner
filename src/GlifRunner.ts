@@ -30,11 +30,17 @@
       if (this._AbortController != null) {
         this._AbortController.abort()
         this._AbortController = undefined
+
+        if (this._Callback != null) {
+          this._Callback(new Error('aborted'),this)
+          this._Callback = undefined
+        }
       }
     }
 
   /**** Response - access Glif output whenever you want ****/
 
+    private _Callback:Function|undefined
     private _Response:object|undefined
 
     public get Response ()  { return (this._Response == null ? undefined : structuredClone(this._Response)) }
@@ -62,6 +68,7 @@
       }
 
       allowFunction('GlifRunner callback',Callback)
+      this._Callback = Callback
 
     /**** look for a Glif API Token ****/
 
