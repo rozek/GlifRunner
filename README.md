@@ -27,7 +27,7 @@ npm install glifrunner
 or load the plain script file directly
 
 ```html
-<script src="https://rozek.github.io/GlifRunner/dist/GlifRunner.esm.js"></script>
+<script type="module" src="https://rozek.github.io/GlifRunner/dist/GlifRunner.esm.js"></script>
 ```
 
 ## Access ##
